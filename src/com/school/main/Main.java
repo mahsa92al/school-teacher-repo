@@ -27,6 +27,8 @@ public class Main {
 
         System.out.println(teacherService.addSchoolByPersonalCode("123", school));
 
+        System.out.println(teacherService.addCourseByPersonalCode("123", course));
+
 
     }
 
