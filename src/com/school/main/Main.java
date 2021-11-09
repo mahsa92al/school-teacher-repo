@@ -2,10 +2,14 @@ package com.school.main;
 
 import com.school.Course;
 import com.school.School;
+import com.school.TeacherService;
 
 public class Main {
+    private static TeacherService teacherService;
 
     public static void main(String[] args) {
+
+        teacherService = new TeacherService();
 
         Course course = new Course("math", 1);
         Course course1 = new Course("computer", 2);
@@ -20,6 +24,9 @@ public class Main {
         School school3 = new School("razavi", 3);
         School school4 = new School("jalal", 1);
         School school5 = new School("diba", 1);
+
+        System.out.println(teacherService.addSchoolByPersonalCode("123", school));
+
 
     }
 
