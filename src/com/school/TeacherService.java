@@ -1,9 +1,13 @@
 package com.school;
 
+import com.school.enums.Degree;
+import com.school.enums.TeacherType;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Mahsa Alikhani m-58
@@ -12,10 +16,10 @@ public class TeacherService {
     List<Teacher> teachers = new ArrayList<>();
 
     public TeacherService() {
-        teachers.add(new FullTimeTeacher("mahla", "hedayat", "123", 6000000));
-        teachers.add(new FullTimeTeacher("ali", "akbari", "124", 4000000));
-        teachers.add(new PartTimeTeacher("sahar", "kamali", "234", 15000, 576));
-        teachers.add(new PartTimeTeacher("mohammad", "moradi", "235", 20000, 400));
+        teachers.add(new FullTimeTeacher("mahla", "hedayat", "123", Degree.PHD, TeacherType.FULL_TIME, 6000000));
+        teachers.add(new FullTimeTeacher("ali", "akbari", "124", Degree.MA, TeacherType.FULL_TIME, 4000000));
+        teachers.add(new PartTimeTeacher("sahar", "kamali", "234", Degree.BS, TeacherType.PART_TIME, 15000, 576));
+        teachers.add(new PartTimeTeacher("mohammad", "moradi", "235", Degree.MA, TeacherType.PART_TIME, 20000, 400));
     }
 
     public Optional<Teacher> findByPersonalCode(String personalCode){
@@ -49,6 +53,15 @@ public class TeacherService {
         foundTeacher.get().getCourse().add(course);
 
         return foundTeacher.get();
+    }
+
+    public List<Teacher> listFullTimeTeacherGreaterThanAverageSalary(){
+        Double sum = teachers.stream().filter(i-> i.getType().equals(TeacherType.FULL_TIME))
+                .map(j-> j.calculateSalary()).reduce(0.0, (k,l)-> k+l);
+        int count = (int) teachers.stream().filter(m-> m.getType().equals(TeacherType.FULL_TIME)).count();
+        Double averageSalary = sum / count;
+        return teachers.stream().filter(n-> n.getType().equals(TeacherType.FULL_TIME))
+                .filter(p-> p.calculateSalary() > averageSalary).collect(Collectors.toList());
     }
 
 }
