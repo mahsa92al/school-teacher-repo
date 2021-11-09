@@ -38,4 +38,17 @@ public class TeacherService {
         return foundTeacher.get();
     }
 
+    public Teacher addCourseByPersonalCode(String personalCode, Course course){
+        Optional<Teacher> foundTeacher = findByPersonalCode(personalCode);
+        if(!foundTeacher.isPresent()){
+            throw new RuntimeException("the teacher not found");
+        }
+        if(foundTeacher.get().getCourse().contains(course)){
+            throw new RuntimeException("duplicate course!");
+        }
+        foundTeacher.get().getCourse().add(course);
+
+        return foundTeacher.get();
+    }
+
 }
