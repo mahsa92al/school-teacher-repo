@@ -29,6 +29,8 @@ public class Main {
 
         System.out.println(teacherService.addCourseByPersonalCode("123", course));
 
+        teacherService.listFullTimeTeacherGreaterThanAverageSalary().forEach(System.out::println);
+
 
     }
 
