@@ -65,4 +65,11 @@ public class TeacherService {
         return teachers.stream().filter(i-> i.getExperienceYear() == 10).collect(Collectors.groupingBy(j-> j.getType()));
     }
 
+    public List<Teacher> listTeacherBAPartTimeSchoolDegree2CourseMoreThan2(){
+        return teachers.stream().filter(i-> i.getType().equals(TeacherType.PART_TIME))
+                .filter(j-> j.getDegree().equals(Degree.BS))
+                .filter(k-> k.getSchool().stream().anyMatch(l-> l.getDegree() == 2))
+                .filter(m-> (long) m.getCourse().size() >2).collect(Collectors.toList());
+    }
+
 }
