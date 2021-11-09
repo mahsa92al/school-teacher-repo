@@ -1,11 +1,14 @@
 package com.school;
 
+import com.school.enums.Degree;
+import com.school.enums.TeacherType;
+
 public class PartTimeTeacher extends Teacher {
     private int hourlySalary;
     private int hourPerMonth;
 
-    public PartTimeTeacher(String name, String lastName, String personalCode, int hourPerMonth, int hourlySalary) {
-        super(name, lastName, personalCode);
+    public PartTimeTeacher(String name, String lastName, String personalCode, Degree degree, TeacherType type, int hourPerMonth, int hourlySalary) {
+        super(name, lastName, personalCode, degree, type);
         this.hourlySalary = hourlySalary;
         this.hourPerMonth = hourPerMonth;
     }
