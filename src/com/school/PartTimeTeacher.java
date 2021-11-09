@@ -7,8 +7,8 @@ public class PartTimeTeacher extends Teacher {
     private int hourlySalary;
     private int hourPerMonth;
 
-    public PartTimeTeacher(String name, String lastName, String personalCode, Degree degree, TeacherType type, int hourPerMonth, int hourlySalary) {
-        super(name, lastName, personalCode, degree, type);
+    public PartTimeTeacher(String name, String lastName, String personalCode, Degree degree, TeacherType type, Integer experienceYear, int hourPerMonth, int hourlySalary) {
+        super(name, lastName, personalCode, degree, type, experienceYear);
         this.hourlySalary = hourlySalary;
         this.hourPerMonth = hourPerMonth;
     }
