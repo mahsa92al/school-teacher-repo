@@ -18,12 +18,13 @@ public abstract class Teacher {
     private int age;
     private TeacherType type;  // نوع معلم : تمام وقت و پاره وقت
 
-    public Teacher(String name, String lastName, String personalNumber, Degree degree, TeacherType type) {
+    public Teacher(String name, String lastName, String personalNumber, Degree degree, TeacherType type, Integer experienceYear) {
         this.name = name;
         this.lastName = lastName;
         this.personalNumber = personalNumber;
         this.degree = degree;
         this.type = type;
+        this.experienceYear = experienceYear;
     }
 
     public String getName() {
