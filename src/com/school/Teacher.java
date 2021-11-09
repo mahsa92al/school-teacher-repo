@@ -133,4 +133,19 @@ public abstract class Teacher {
     public int hashCode() {
         return Objects.hash(name, lastName, personalNumber);
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", personalNumber='" + personalNumber + '\'' +
+                ", degree=" + degree +
+                ", school=" + school +
+                ", experienceYear=" + experienceYear +
+                ", course=" + course +
+                ", age=" + age +
+                ", type=" + type +
+                '}';
+    }
 }
