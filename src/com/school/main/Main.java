@@ -31,6 +31,8 @@ public class Main {
 
         teacherService.listFullTimeTeacherGreaterThanAverageSalary().forEach(System.out::println);
 
+        teacherService.listTeacherTenYearsExperience().forEach((i,j)-> System.out.println(i + ": " + j));
+
 
     }
 
