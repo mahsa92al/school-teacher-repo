@@ -72,4 +72,8 @@ public class TeacherService {
                 .filter(m-> (long) m.getCourse().size() >2).collect(Collectors.toList());
     }
 
+    public Set<School> teacherSchoolSet(){
+        return teachers.stream().map(i-> i.getSchool()).flatMap(Collection::stream).collect(Collectors.toSet());
+    }
+
 }
