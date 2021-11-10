@@ -26,8 +26,11 @@ public class Main {
         School school5 = new School("diba", 1);
 
         System.out.println(teacherService.addSchoolByPersonalCode("123", school));
+        System.out.println(teacherService.addSchoolByPersonalCode("124", school4));
         System.out.println(teacherService.addSchoolByPersonalCode("234", school));
         System.out.println(teacherService.addSchoolByPersonalCode("234", school1));
+        System.out.println(teacherService.addSchoolByPersonalCode("235", school3));
+
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println(teacherService.addCourseByPersonalCode("123", course));
         System.out.println(teacherService.addCourseByPersonalCode("234", course));
@@ -40,6 +43,8 @@ public class Main {
         teacherService.listTeacherTenYearsExperience().forEach((i,j)-> System.out.println(i + ": " + j));
         System.out.println("-----------------------------------------------------------------------------");
         teacherService.listTeacherBAPartTimeSchoolDegree2CourseMoreThan2().forEach(System.out::println);
+        System.out.println("-----------------------------------------------------------------------------");
+        teacherService.teacherSchoolSet().forEach(i-> System.out.println(i.getName()));
         System.out.println("-----------------------------------------------------------------------------");
 
 
