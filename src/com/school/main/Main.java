@@ -26,10 +26,14 @@ public class Main {
         School school5 = new School("diba", 1);
 
         System.out.println(teacherService.addSchoolByPersonalCode("123", school));
+        System.out.println(teacherService.addSchoolByPersonalCode("123", school2));
+        System.out.println(teacherService.addSchoolByPersonalCode("123", school3));
         System.out.println(teacherService.addSchoolByPersonalCode("124", school4));
+        System.out.println(teacherService.addSchoolByPersonalCode("124", school5));
         System.out.println(teacherService.addSchoolByPersonalCode("234", school));
         System.out.println(teacherService.addSchoolByPersonalCode("234", school1));
         System.out.println(teacherService.addSchoolByPersonalCode("235", school3));
+        System.out.println(teacherService.addSchoolByPersonalCode("235", school4));
 
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println(teacherService.addCourseByPersonalCode("123", course));
@@ -44,8 +48,9 @@ public class Main {
         System.out.println("-----------------------------------------------------------------------------");
         teacherService.listTeacherBAPartTimeSchoolDegree2CourseMoreThan2().forEach(System.out::println);
         System.out.println("-----------------------------------------------------------------------------");
-        teacherService.teacherSchoolSet().forEach(i-> System.out.println(i.getName()));
+        teacherService.teachersSchoolSet().forEach(i-> System.out.println(i.getName()));
         System.out.println("-----------------------------------------------------------------------------");
+        teacherService.teacherListBySchool().forEach((i,j)-> System.out.println(i.getName() + ": " + j));
 
 
     }
