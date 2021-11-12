@@ -13,6 +13,7 @@ public class TeacherService {
     List<Teacher> teachers = new ArrayList<>();
 
     public TeacherService() {
+
         teachers.add(new FullTimeTeacher("mahla", "hedayat", "123", Degree.PHD, TeacherType.FULL_TIME,10, 6000000));
         teachers.add(new FullTimeTeacher("ali", "akbari", "124", Degree.MA, TeacherType.FULL_TIME, 7, 4000000));
         teachers.add(new PartTimeTeacher("sahar", "kamali", "234", Degree.BS, TeacherType.PART_TIME, 5, 15000, 576));
@@ -41,7 +42,7 @@ public class TeacherService {
 
     public Teacher addCourseByPersonalCode(String personalCode, Course course){
         Optional<Teacher> foundTeacher = findByPersonalCode(personalCode);
-        if(!foundTeacher.isPresent()){
+        if(foundTeacher.isEmpty()){
             throw new RuntimeException("the teacher not found");
         }
         if(foundTeacher.get().getCourse().contains(course)){
@@ -54,7 +55,7 @@ public class TeacherService {
 
     public List<Teacher> listFullTimeTeacherGreaterThanAverageSalary(){
         Double sum = teachers.stream().filter(i-> i.getType().equals(TeacherType.FULL_TIME))
-                .map(j-> j.calculateSalary()).reduce(0.0, (k,l)-> k+l);
+                .map(Teacher::calculateSalary).reduce(0.0, (k, l)-> k+l); //reduce(0.0, Double::sum)
         int count = (int) teachers.stream().filter(m-> m.getType().equals(TeacherType.FULL_TIME)).count();
         Double averageSalary = sum / count;
         return teachers.stream().filter(n-> n.getType().equals(TeacherType.FULL_TIME))
@@ -62,7 +63,7 @@ public class TeacherService {
     }
 
     public Map<TeacherType , List<Teacher>> listTeacherTenYearsExperience(){
-        return teachers.stream().filter(i-> i.getExperienceYear() == 10).collect(Collectors.groupingBy(j-> j.getType()));
+        return teachers.stream().filter(i-> i.getExperienceYear() == 10).collect(Collectors.groupingBy(Teacher::getType));
     }
 
     public List<Teacher> listTeacherBAPartTimeSchoolDegree2CourseMoreThan2(){
@@ -72,8 +73,20 @@ public class TeacherService {
                 .filter(m-> (long) m.getCourse().size() >2).collect(Collectors.toList());
     }
 
-    public Set<School> teacherSchoolSet(){
-        return teachers.stream().map(i-> i.getSchool()).flatMap(Collection::stream).collect(Collectors.toSet());
+    public Set<School> teachersSchoolSet(){
+        return teachers.stream().map(Teacher::getSchool).flatMap(Collection::stream).collect(Collectors.toSet());
+    }
+
+    public Map<School, List<Teacher>> teacherListBySchool(){
+        Set schools = teachersSchoolSet();
+        Map<School, List<Teacher>> teacherSchoolMap = new HashMap<>();
+        schools.forEach(school-> teacherSchoolMap.put((School) school, new ArrayList<>()));
+         teachers.forEach(teacher -> {
+            schools.stream()
+                    .filter(school-> teacher.getSchool().contains(school))
+                    .forEach(school -> teacherSchoolMap.get(school).add(teacher));
+        });
+         return teacherSchoolMap;
     }
 
 }
